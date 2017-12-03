@@ -11,6 +11,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/Weekly/:lat/:lng',
+      name: 'Weekly',
+      component: Weekly
     }
   ]
 })

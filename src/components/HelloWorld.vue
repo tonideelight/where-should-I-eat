@@ -1,12 +1,48 @@
 <template>
 <div>
-<h1>Sunrise/Sunset Service</h1>
-<h2>City Search</h2>
-<form v-on:submit.prevent="getCities">
-        <p>Enter city name: <input type="text" v-model="query" placeholder="Seattle"> <button type="submit">Go</button></p>
+    <form v-on:submit.prevent="findAddress">
+      <p>Find coordinates for this address:<input type="text" v-model="address"><button type="submit">Search</button></p>
     </form>
+    <li v-for="item in results" class="item">
+        <p>Latitude: {{ item.geometry.location.lat }} Longitude: {{ item.geometry.location.lng }}</p>
+    </li>
+      <router-link :to="{ name: 'Weekly', params: { lat: this.lat, lng: this.lng }}">User</router-link>
 </div>    
 </template>
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'LatLong',
+  data () {
+    return {
+      results: null,
+      errors: [],
+      address: '',
+      lat: '',
+      lng: ''
+    }
+  },
+  methods: {
+    findAddress: function(){
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: this.address,
+          key: 'AIzaSyBRuRh3DR7TV4iKuVpot-dBPqNoOW7iQto'
+        }
+      })
+      .then(response => {
+        this.results = response.data.results;
+        this.lat = this.results[0].geometry.location.lat;
+        this.lng = this.results[0].geometry.location.lng;
+      })
+      .catch(error => {
+        this.errors.push(error);
+      });
+    }
+  }
+}
+</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {

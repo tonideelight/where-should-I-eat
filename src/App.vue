@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Sunrise/Sunset</h1>
+    <h1>Coorindates</h1>
     <router-view/>
   </div>
 </template>
