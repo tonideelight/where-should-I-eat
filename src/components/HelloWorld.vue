@@ -6,7 +6,7 @@
     <li v-for="item in results" class="item">
         <p>Latitude: {{ item.geometry.location.lat }} Longitude: {{ item.geometry.location.lng }}</p>
     </li>
-      <router-link :to="{ name: 'Weekly', params: { lat: this.lat, lng: this.lng }}">User</router-link>
+      <router-link :to="{ name: 'Weekly', params: { lat: this.lat, lng: this.lng }}">Click here to see satellite view</router-link>
 </div>    
 </template>
 <script>
