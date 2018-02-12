@@ -1,7 +1,7 @@
 <template>
 <div>
     <form v-on:submit.prevent="findURL">
-      <p>Find view for these coordinates:<input type="text" v-model="lat"><input type="text" v-model="lng"><button type="submit">Search</button></p>
+      <p><input type="text" v-model="lat"><input type="text" v-model="lng"><button type="submit">Search</button></p>
     </form>
     <iframe v-if="results" v-bind:src="results"></iframe>
     <router-link :to="{ path: '/' }">Go Back</router-link>
@@ -23,7 +23,7 @@ export default {
   //show location on satellite
   methods: {
       findURL: function(){
-         this.results = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCFhAKFuPVCI4QOnzIUm44Ng9LGEsxZjzM&center=${this.lat},${this.lng}&zoom=18&maptype=satellite`
+         this.results = `https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.lat},${this.lng}&radius=5000&type=restaurant&key=AIzaSyCaENM1qL1ZLAuVH4zczvi-_G2LPaaMA_Q`
       }
       
     },

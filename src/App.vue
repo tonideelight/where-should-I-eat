@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Coorindates</h1>
+    <h1>Where Should I Eat?</h1>
     <router-view/>
   </div>
 </template>

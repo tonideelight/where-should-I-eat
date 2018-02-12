@@ -1,12 +1,10 @@
 <template>
 <div>
     <form v-on:submit.prevent="findAddress">
-      <p>Find coordinates for this address:<input type="text" v-model="address"><button type="submit">Search</button></p>
+      <p>Find restuarants for this address:<input type="text" v-model="address"><button type="submit">Search</button></p>
     </form>
-    <li v-for="item in results" class="item">
-        <p>Latitude: {{ item.geometry.location.lat }} Longitude: {{ item.geometry.location.lng }}</p>
-    </li>
-      <router-link :to="{ name: 'Weekly', params: { lat: this.lat, lng: this.lng }}">Click here to see satellite view</router-link>
+    
+      <router-link :to="{ name: 'Weekly', params: { lat: this.lat, lng: this.lng }}">Click here to find restaurant</router-link>
 </div>    
 </template>
 <script>
