@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       results: null,
-      errors: [],
+      errors: [], 
       lat: '',
       lng: ''
     }
