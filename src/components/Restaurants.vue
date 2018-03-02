@@ -45,7 +45,7 @@ export default {
       });
     },
     findNearbyRestaurant: function() {
-      axios.get('http://crossorigin.me/https://maps.googleapis.com/maps/api/place/radarsearch/json', {
+      axios.get('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/radarsearch/json', {
         params: {
           key: 'AIzaSyCaENM1qL1ZLAuVH4zczvi-_G2LPaaMA_Q',
           location: `${this.lat},${this.lng}`,
