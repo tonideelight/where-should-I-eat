@@ -1,21 +1,26 @@
 <template>
 <div>
     <form v-on:submit.prevent="findAddress">
-      <p>Find restuarants for this address:<input type="text" v-model="address"><button type="submit">Search</button></p>
+      <p>Find restaurants for this address:<input type="text" v-model="address"><button type="submit">Search</button></p>
+      <spinner v-if="showSpinner"></spinner>
     </form>
     <iframe width="100%" height="800" frameborder="0" style="border:0" v-if="embedURL" v-bind:src="embedURL"></iframe>
+    
 </div>    
 </template>
 <script>
 import axios from 'axios';
+import CubeSpinner from '@/components/CubeSpinner';
 
 function getRandomValue(values) {
   const randomIndex = Math.floor(Math.random() * Math.floor(values.length));
   return values[randomIndex];
 }
-
 export default {
   name: 'LatLong',
+  components: {
+    spinner: CubeSpinner,
+  },
   data () {
     return {
       results: null,
@@ -23,11 +28,13 @@ export default {
       address: '',
       lat: '',
       lng: '',
-      embedURL: ''
+      embedURL: '',
+      showSpinner: false
     }
   },
   methods: {
     findAddress: function(){
+      this.showSpinner = true;
       axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: this.address,
@@ -41,6 +48,7 @@ export default {
         this.findNearbyRestaurant();
       })
       .catch(error => {
+        this.showSpinner = false;
         this.errors.push(error);
       });
     },
@@ -56,10 +64,13 @@ export default {
       .then(response => {
         const place_id = getRandomValue(response.data.results).place_id;
         this.embedURL = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDpfr0LbX7DxQNVzUsxAObNkeMQKC1SiFU&q=place_id:${place_id}&center=${this.lat},${this.lng}`;
+        this.showSpinner = false;
       })
     }
+    
   }
 }
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
