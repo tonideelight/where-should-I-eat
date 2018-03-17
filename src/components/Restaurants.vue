@@ -1,10 +1,10 @@
 <template>
 <div>
     <form v-on:submit.prevent="findAddress">
-      <p>Find restaurants for this address:<input type="text" v-model="address"><button type="submit">Let's Eat</button></p>
+      <p>Find restaurants for this address:<input type="text" v-model="address"><button type="submit">Let's Eat!</button></p>
       <spinner v-if="showSpinner"></spinner>
     </form>
-    <iframe width="100%" height="400" frameborder="0" style="border:0" v-if="embedURL" v-bind:src="embedURL"></iframe>
+    <iframe width="50%" height="400" frameborder="0" style="border:0" v-if="embedURL" v-bind:src="embedURL"></iframe>
     
 </div>    
 </template>
